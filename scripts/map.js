@@ -21,11 +21,6 @@ $(window).on('load', function() {
     });
   }
 
-var map = L.map('map', {
-    zoomDelta: 0.25,
-    zoomSnap: 0
-});
-
   /**
    * Sets the map view so that all markers are visible, or
    * to specified (lat, lon) and zoom if all three are specified
