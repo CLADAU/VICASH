@@ -695,6 +695,8 @@ $(window).on('load', function() {
       $(this).prepend(legendIcon);
     });
 
+    map.attributionControl.remove();
+
     // When all processing is done, hide the loader and make the map visible
     showMap();
 
