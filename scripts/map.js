@@ -21,6 +21,7 @@ $(window).on('load', function() {
     });
   }
 
+
   /**
    * Sets the map view so that all markers are visible, or
    * to specified (lat, lon) and zoom if all three are specified
