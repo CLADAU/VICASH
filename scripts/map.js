@@ -947,10 +947,6 @@ $(window).on('load', function() {
       accessToken: trySetting('_tileProviderApiKey', '')
     }).addTo(map);
 
-    L.control.attribution({
-      position: trySetting('_mapAttribution', 'bottomright')
-    }).addTo(map);
-
   }
 
   /**
