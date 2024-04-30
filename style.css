@@ -40,7 +40,7 @@ h6 {
 .leaflet-control-custom {
   padding: 6px 8px;
   background: white;
-  color: #333;
+  color: #0000ff;
 }
 
 .leaflet-control-geocoder {
@@ -58,7 +58,7 @@ form {
 }
 
 .polygons-legend-scale i {
-  width: 16px;
+  width: 20px;
   height: 16px;
   float: left;
   margin-right: 8px;
@@ -205,6 +205,7 @@ form {
 
 .markers-legend-icon {
   height: 12px;
+  width: 20px;
   vertical-align: middle;
 }
 
