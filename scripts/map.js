@@ -1136,3 +1136,29 @@ $(window).on('load', function() {
   }
 
 });
+
+// Assuming you have a Leaflet map initialized in 'map'
+function smoothZoom(map, targetZoom) {
+    var currentZoom = map.getZoom();
+    var zoomStep = targetZoom > currentZoom ? 0.1 : -0.1;
+
+    var interval = setInterval(function() {
+        currentZoom += zoomStep;
+        map.setZoom(currentZoom);
+
+        if (zoomStep > 0 && currentZoom >= targetZoom ||
+            zoomStep < 0 && currentZoom <= targetZoom) {
+            clearInterval(interval);
+        }
+    }, 50); // Adjust time interval for smoother or faster transitions
+}
+
+map.on('wheel', function(e) {
+    e.originalEvent.preventDefault();
+
+    var deltaY = e.originalEvent.deltaY;
+    var direction = deltaY > 0 ? -1 : 1;
+    var targetZoom = map.getZoom() + direction;
+
+    smoothZoom(map, targetZoom);
+});
