@@ -22,46 +22,43 @@ $(window).on('load', function() {
   }
 
 
-/**
- * Sets the map view to the user's current location, or
- * to specified (lat, lon) and zoom if all three are specified
- */
-function centerAndZoomMap(points) {
-    var lat, lon, zoom = 16; // Default zoom
+  /**
+   * Sets the map view so that all markers are visible, or
+   * to specified (lat, lon) and zoom if all three are specified
+   */
+  function centerAndZoomMap(points) {
+    var lat = map.getCenter().lat, latSet = false;
+    var lon = map.getCenter().lng, lonSet = false;
+    var zoom = 12, zoomSet = false;
     var center;
 
-    // Use settings if specified
     if (getSetting('_initLat') !== '') {
       lat = getSetting('_initLat');
+      latSet = true;
     }
+
     if (getSetting('_initLon') !== '') {
       lon = getSetting('_initLon');
+      lonSet = true;
     }
+
     if (getSetting('_initZoom') !== '') {
       zoom = parseInt(getSetting('_initZoom'));
+      zoomSet = true;
     }
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            lat = lat || position.coords.latitude;
-            lon = lon || position.coords.longitude;
-            center = L.latLng(lat, lon);
-
-            if (!points) {
-              map.setView(center, zoom);
-            } else {
-              center = points.getBounds().getCenter();
-              zoom = map.getBoundsZoom(points.getBounds());
-              map.setView(center, zoom);
-            }
-        });
+    if ((latSet && lonSet) || !points) {
+      center = L.latLng(lat, lon);
     } else {
-        // Fallback if geolocation is not supported
-        center = L.latLng(lat || 0, lon || 0); // Default to (0, 0) if no settings
-        map.setView(center, zoom);
+      center = points.getBounds().getCenter();
     }
-}
 
+    if (!zoomSet && points) {
+      zoom = map.getBoundsZoom(points.getBounds());
+    }
+
+    map.setView(center, zoom);
+  }
 
 
   /**
